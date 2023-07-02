@@ -4,7 +4,13 @@ from xgboost import XGBClassifier
 import traceback
 import pandas as pd
 import numpy as np
-
+#Load files
+with open('modelxgb_con_pesos.pickle', 'rb') as f:
+    model = pickle.load(f)
+print ('Modelo cargado')
+with open('columns_modelxgb_con_pesos.pickle', 'rb') as f:
+    model_columns = pickle.load(f) 
+print ('Columnas del modelo cargadas')
 # Your API definition
 app = Flask(__name__)
 
@@ -29,11 +35,4 @@ def predict():
         return ('Aún no hay un modelo')
 
 if __name__ == '__main__':
-    with open('modelxgb_con_pesos.pickle', 'rb') as f:
-        model = pickle.load(f)
-    print ('Modelo cargado')
-    with open('columns_modelxgb_con_pesos.pickle', 'rb') as f:
-        model_columns = pickle.load(f) 
-    print ('Columnas del modelo cargadas')
-
-    app.run(debug=True,port=4002)
+    app.run()
